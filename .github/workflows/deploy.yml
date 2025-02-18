@@ -1,0 +1,33 @@
+name: Build and Deploy to Azure App Service
+
+on:
+  push:
+    branches: [ "main" ]  # main 브랜치 push 시 동작(원하는 브랜치로 변경 가능)
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '21'  # 원하는 버전 (예: 17, 21)
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: "bmc-00"   # 실제 App Service 이름
+          package: "target/b-log-0.0.1-SNAPSHOT.jar"            # 빌드 결과물 경로
