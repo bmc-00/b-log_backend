@@ -17,6 +17,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'  # 원하는 버전 (예: 17, 21)
+          
+      - name: set Env
+        run: |
+          echo "DB_PASSWORD=${{ secrets.AZURE_DB_PASSWORD }}" >> $GITHUB_ENV
 
       - name: Build with Maven
         run: mvn clean package
