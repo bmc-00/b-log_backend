@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "posts")
-public class Post {
+public class PostDetail {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class Post {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    public Post() {}
+    public PostDetail() {}
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -40,8 +40,8 @@ public class Post {
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
     
-    public String getSummary() { return summary; }
-    public void setSummary(String summary) { this.summary = summary; }
+    public String getContent() { return content; }
+    public void setContent(String content) { this.content = content; }
 
     public Integer getAuthorId() { return authorId; }
     public void setAuthorId(Integer authorId) { this.authorId = authorId; }
