@@ -17,7 +17,7 @@ public class SecurityConfig {
         http
             .csrf().disable()
             .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll() // ✅ 모든 요청 인증 없이 허용
+                .anyRequest().permitAll()
             )
             .formLogin().disable()
             .httpBasic().disable();

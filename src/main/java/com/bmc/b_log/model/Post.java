@@ -26,10 +26,10 @@ public class Post {
     private String category;
     private String imageUrl;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, name = "created_at", columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false, name = "updated_at", columnDefinition = "TIMESTAMP")
     private LocalDateTime updatedAt;
 
     public Post() {}
@@ -42,6 +42,9 @@ public class Post {
     
     public String getSummary() { return summary; }
     public void setSummary(String summary) { this.summary = summary; }
+    
+    public String getContent() { return content; }
+    public void setContent(String content) { this.content = content; }
 
     public Integer getAuthorId() { return authorId; }
     public void setAuthorId(Integer authorId) { this.authorId = authorId; }
@@ -54,5 +57,8 @@ public class Post {
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 
 }
