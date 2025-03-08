@@ -8,8 +8,6 @@ import com.bmc.b_log.repository.PostTagRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class TagService {
@@ -36,22 +34,6 @@ public class TagService {
     // 모든 태그 조회
     public List<Tag> getAllTags() {
         return tagRepository.findAll();
-    }
-
-    // 특정 게시글의 태그 목록 조회
-    public List<Tag> getTagsByPost(Post post) {
-        return postTagRepository.findByPost(post).stream()
-                .map(postTag -> postTag.getTag())
-                .collect(Collectors.toList());
-    }
-
-    // 특정 태그가 사용된 게시글 목록 조회
-    public List<Post> getPostsByTag(String tagName) {
-        Optional<Tag> tag = tagRepository.findByName(tagName);
-        return tag.map(value -> postTagRepository.findByTag(value).stream()
-                .map(PostTag::getPost)
-                .collect(Collectors.toList()))
-                .orElseThrow(() -> new RuntimeException("태그를 찾을 수 없습니다."));
     }
 
     // 게시글에 태그 할당

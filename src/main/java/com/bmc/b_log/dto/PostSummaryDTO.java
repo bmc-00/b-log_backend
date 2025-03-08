@@ -12,7 +12,7 @@ import lombok.Getter;
 public class PostSummaryDTO {
     private Long id;
     private String title;
-    private Long authorId;
+    private Integer authorId;
     private String summary;
     private LocalDateTime createdAt;
     private String category;
@@ -20,7 +20,7 @@ public class PostSummaryDTO {
     private String tagNames;
     private String tagColors;
 
-    public PostSummaryDTO(Long id, String title, Long authorId, String summary, Timestamp createdAt, String category, String imageUrl, String tagNames, String tagColors) {
+    public PostSummaryDTO(Long id, String title, Integer authorId, String summary, Timestamp createdAt, String category, String imageUrl, String tagNames, String tagColors) {
         this.id = id;
         this.title = title;
         this.authorId = authorId;
@@ -34,7 +34,7 @@ public class PostSummaryDTO {
 
     public Long getId() { return id; }
     public String getTitle() { return title; }
-    public Long getAuthorId() { return authorId; }
+    public Integer getAuthorId() { return authorId; }
     public String getSummary() { return summary; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public String getCategory() { return category; }

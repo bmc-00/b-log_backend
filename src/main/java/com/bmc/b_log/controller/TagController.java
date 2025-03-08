@@ -23,10 +23,4 @@ public class TagController {
     public List<Tag> getAllTags() {
         return tagService.getAllTags();
     }
-
-    // 특정 태그가 사용된 게시글 목록 조회
-    @GetMapping("/{tagName}/posts")
-    public List<Post> getPostsByTag(@PathVariable String tagName) {
-        return tagService.getPostsByTag(tagName);
-    }
 }

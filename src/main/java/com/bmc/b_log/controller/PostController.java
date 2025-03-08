@@ -6,7 +6,7 @@ import com.bmc.b_log.service.PostService;
 import com.bmc.b_log.service.TagService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.data.domain.Page;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -23,8 +23,34 @@ public class PostController {
     }
 
     @GetMapping
-    public List<PostSummaryDTO> getAllPostSummaries() {
-        return postService.getAllPostSummaries();
+    public ResponseEntity<Page<PostSummaryDTO>> getPostList(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Page<PostSummaryDTO> posts = postService.getAllPostSummaries(page, size);
+        return ResponseEntity.ok(posts);
+    }
+    
+    @GetMapping("/bytag")
+    public ResponseEntity<Page<PostSummaryDTO>> getPostListByTag(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+    		@RequestParam String tag) {
+        Page<PostSummaryDTO> posts = postService.getPostSummariesByTag(page, size, tag);
+        return ResponseEntity.ok(posts);
+    }
+    
+    @GetMapping("/bycategory")
+    public ResponseEntity<Page<PostSummaryDTO>> getPostListByCategory(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+    		@RequestParam String category) {
+        Page<PostSummaryDTO> posts = postService.getPostSummariesByCategory(page, size, category);
+        return ResponseEntity.ok(posts);
+    }
+    
+    @GetMapping("/getcategories")
+    public List<String> getAllCategories() {
+        return postService.getAllCategories();
     }
     
     @GetMapping("/{id}")
