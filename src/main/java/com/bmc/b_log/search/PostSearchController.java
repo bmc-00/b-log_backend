@@ -11,7 +11,6 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/search")
-@RequiredArgsConstructor
 public class PostSearchController {
 
     private final PostSearchService postSearchService;
