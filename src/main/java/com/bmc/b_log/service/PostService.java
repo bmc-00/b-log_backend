@@ -26,6 +26,23 @@ public class PostService {
         this.postRepository = postRepository;
         
     }
+    
+    public PostSummaryDTO getPostSummary(Long id) {
+    	Object[] result = postRepository.findPostSummary(id)[0];
+    	PostSummaryDTO dto =  
+        new PostSummaryDTO(
+                (Long) result[0],  // id
+                (String) result[1], // title
+                (Integer) result[2],  // authorId
+                (String) result[3], // summary
+                (Timestamp) result[4], // createdAt
+                (String) result[5], // category
+                (String) result[6], // imageUrl
+                (String) result[7], // tagNames
+                (String) result[8]  // tagColors
+        );
+    	return dto;
+    }
 
     public Page<PostSummaryDTO> getAllPostSummaries(int page, int size) {
     	  Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "created_at"));

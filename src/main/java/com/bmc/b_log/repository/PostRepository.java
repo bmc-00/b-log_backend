@@ -75,4 +75,22 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     		select DISTINCT p.category FROM posts p;
     		""",nativeQuery = true)
     List<String> findAllCategories();
+    
+    @Query(value = """
+    		SELECT p.id, p.title, p.author_id, p.summary, p.created_at, 
+                   p.category, p.image_url,
+                   (SELECT STRING_AGG(t.name, ',') 
+                    FROM post_tags pt 
+                    JOIN tags t ON pt.tag_id = t.id 
+                    WHERE pt.post_id = p.id) as tag_names,
+                   (SELECT STRING_AGG(t.color, ',') 
+                    FROM post_tags pt 
+                    JOIN tags t ON pt.tag_id = t.id 
+                    WHERE pt.post_id = p.id) as tag_colors
+            FROM posts p
+            WHERE p.id = :id
+    		""", 
+            countQuery = "SELECT COUNT(*) FROM posts", 
+            nativeQuery = true)
+    Object[][] findPostSummary(Long id);
 }

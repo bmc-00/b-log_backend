@@ -58,6 +58,11 @@ public class PostController {
         return postService.getPostById(id);
     }
     
+    @GetMapping("/summary/{id}") //검색 결과를 위한 요약 데이터 전달
+    public PostSummaryDTO getPostSummaryById(@PathVariable Long id) {
+    	return postService.getPostSummary(id);
+    }
+    
     @PostMapping("/upload")
     public ResponseEntity<Post> createPost(@RequestBody Post post, @RequestParam List<String> tags) {
         Post savedPost = postService.createPost(post);
